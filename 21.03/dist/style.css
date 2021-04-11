@@ -1,0 +1,58 @@
+body{
+    font-family: 'Noto Sans JP', sans-serif;
+    width: 100%;
+}
+.showKeys{
+    height: 20vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.showButton{
+    background-color: #e6e6e6;
+    width: 8vh;
+    height: 8vh;
+    font-size: 3vh;
+    margin: 1vh;
+    border:0;
+}
+.box{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.recording, .playAll{
+    width: 30vh;
+    height: 5vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 1vh;
+    border:1px solid #e6e6e6;
+    padding: 1vh;
+    
+}
+.recording > span{
+    margin-right: 1vh;
+}
+.startRecording, .playRecording, .removeRecording{
+    width: 3vh;
+    height: 3vh;
+    margin: 1vh;
+    font-size: 2vh;
+    font-weight: bold;
+
+}
+.startRecording{
+    background-color: #ff9999;
+    border:0;
+}
+.playRecording{
+    background-color:#9fdf9f;
+    border:0;
+}
+.playAll{
+    border:0;
+    font-size: 2vh;
+}

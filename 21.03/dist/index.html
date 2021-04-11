@@ -4,12 +4,55 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com"><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100&display=swap" rel="stylesheet">
     <title>Document</title>
 </head>
 <body>
+
+    <div class="showKeys">
+        <button class="showButton">q</button>
+        <button class="showButton">w</button>
+        <button class="showButton">e</button>
+        <button class="showButton">u</button>
+        <button class="showButton">i</button>
+        <button class="showButton">o</button>
+    </div>
+
     <audio src="../sounds/boom.wav" data-sound="boom"></audio>
     <audio src="../sounds/clap.wav" data-sound="clap"></audio>
     <audio src="../sounds/hihat.wav" data-sound="hihat"></audio>
+    <audio src="../sounds/tom.wav" data-sound="tom"></audio>
+    <audio src="../sounds/openhat.wav" data-sound="openhat"></audio>
+    <audio src="../sounds/ride.wav" data-sound="ride"></audio>
+    <audio src="../sounds/snare.wav" data-sound="snare"></audio>
+
+    <div class="box">
+        <div class="recording">
+            <span>Recording 1</span>
+            <button class="startRecording" data-start="0"><i class="fa fa-dot-circle-o"></i></button>
+            <button class="playRecording" data-play="0"><i class="fa fa-caret-right"></i></button>
+        </div>
+        <div class="recording">
+            <span>Recording 2</span>
+            <button class="startRecording" data-start="1"><i class="fa fa-dot-circle-o"></i></button>
+            <button class="playRecording" data-play="1"><i class="fa fa-caret-right"></i></button>
+        </div>
+        <div class="recording">
+            <span>Recording 3</span>
+            <button class="startRecording" data-start="2"><i class="fa fa-dot-circle-o"></i></button>
+            <button class="playRecording" data-play="2"><i class="fa fa-caret-right"></i></button>
+        </div>
+        <div class="recording">
+            <span>Recording 4</span>
+            <button class="startRecording" data-start="3"><i class="fa fa-dot-circle-o"></i></button>
+            <button class="playRecording" data-play="3"><i class="fa fa-caret-right"></i></button>
+        </div>
+        <button class="playAll">Play All</button>
+    </div>
+        
+
     <script src="script.js"></script>
 </body>
 </html>
