@@ -1,0 +1,21 @@
+.form{
+  width: 30vh;
+  height: 20vh;
+  background-color: skyblue;
+  text-align: center;
+
+  &__title{
+    margin: 5vh 0vh .5vh 0vh;
+    width: 90%;
+    height: 2vh;
+
+  }
+  &__content{
+    width: 90%;
+    height: 5vh;
+  }
+  &__options{
+    margin-top: 1vh;
+  }
+
+}
