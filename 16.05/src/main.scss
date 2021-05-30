@@ -1,7 +1,18 @@
+body{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+h2{
+  width: 100%;
+  height: 5vh;
+  text-align: center;
+}
 .form{
   width: 30vh;
   height: 20vh;
-  background-color: skyblue;
+  background-color: #e6e6e6;
   text-align: center;
 
   &__title{
@@ -17,5 +28,109 @@
   &__options{
     margin-top: 1vh;
   }
+  &__color{
+    input[type="radio"] {
+      display: none;
+    }
 
+    label {
+      border-radius: 50%;
+      border:1px solid white;
+      
+    }
+    label:nth-child(2){
+      color:#e6e6e6;
+    }
+    label:nth-child(4){
+      color:lightpink;
+    }
+    label:nth-child(6){
+      color:lightskyblue;
+    }
+    label:nth-child(8){
+      color:lightgreen;
+    }
+    input[type="radio"]:checked + label{
+      border:2px solid lightslategray;
+    }
+        
+  }
+}
+.notesBox{
+  margin-top:2vh;
+  width: 100%;
+  min-height: 50vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  p{
+    display: flex;
+    padding-left: 2vh;
+    align-items: center;
+    border: 1px solid black;
+    width: 100%;
+    height: 4vh;
+    font-size: 2vh;
+  
+  }
+  &__container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+  }
+}
+.notes{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 30vh;
+  height: 25vh;
+  margin: 1vh;
+  background-color:#e6e6e6;
+
+  &__edit, &__favourite, &__remove{
+    margin:.5vh;
+    background-color: transparent;
+    float: right;
+  }
+  &__noteTitle{
+    width: 90%;
+    height: 3vh;
+    margin-bottom: 1vh;
+  }
+
+  &__noteContent{
+    width: 90%;
+    min-height: 10vh;
+  }
+  textarea:disabled{
+    background-color: transparent;
+    border:1px solid pink;
+    text-align: center;
+  }
+ 
+}
+.favouriteNote{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  p{
+    border: 1px solid black;
+    display: flex;
+    padding-left: 2vh;
+    align-items: center;
+    height: 4vh;
+    width:100%;
+    font-size: 2vh;
+  }
+  &__container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+  }
 }
