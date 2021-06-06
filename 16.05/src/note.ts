@@ -1,8 +1,9 @@
 import AppStorage from "./appStorage";
 import Notes from "./notes";
-
+import environment from "../config/config" 
+import AppFirebaseStorage from "./firebase";
 class Note {
-    appStorage: AppStorage;
+    appStorage: AppStorage | AppFirebaseStorage;
     notes: Notes;
     title: HTMLInputElement;
     content: HTMLInputElement;
@@ -10,11 +11,24 @@ class Note {
     colorsArray: HTMLInputElement[];
 
     constructor() {
-        this.appStorage = new AppStorage();
+        if(environment === "ls"){
+            this.appStorage = new AppStorage();
+        }
+        else{
+            this.appStorage = new AppFirebaseStorage();
+        }
         this.notes = new Notes();
         this.setListener()
         this.getDate()
-        this.appStorage.showLocalStorage();
+        if(environment === "ls"){
+            this.appStorage = new AppStorage();
+            this.appStorage.showLocalStorage();
+        }
+        else {
+            this.appStorage = new AppFirebaseStorage();
+            this.appStorage.getNotes()
+        }
+        
         this.callListeners()
     }
 
@@ -34,7 +48,15 @@ class Note {
         
         this.createContainer();
         this.callListeners();
-        this.appStorage.takeNotes();        
+        if(environment === "ls"){
+            this.appStorage = new AppStorage();
+            this.appStorage.takeNotes();
+        }
+        else{
+            this.appStorage = new AppFirebaseStorage();
+            //console.log(this.appStorage.saveNote());
+        }
+        
     }
 
     setListener(): void {

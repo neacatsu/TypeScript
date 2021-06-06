@@ -1,4 +1,4 @@
-import INote from "./note.interface"
+import INote from "./interfaces/note.interface"
 
 class AppStorage {
     localData: INote[];

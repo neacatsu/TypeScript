@@ -1,9 +1,10 @@
 import INote from "./note.interface"
 
 interface IAppStorage {
-    saveNote: (note: INote) => void,
-    getNotes: () => INote[],
-    deleteNote: (noteId: string) => void 
+    saveNote: (note: INote) => Promise<void>,
+    getNotes: () => Promise<void>,
+    deleteNote: (noteId: string) => Promise<void>,
+    updateNote: (noteId: string, content: INote) => Promise<void>
 }
 
-export default INote;
+export default IAppStorage;
