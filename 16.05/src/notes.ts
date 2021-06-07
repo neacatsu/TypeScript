@@ -1,10 +1,15 @@
 import AppStorage from "./appStorage"
+import FirebaseController from "./firebaseController"
+import environment from "../config/config"
+import AppFirebaseStorage from "./firebase";
 
 class Notes { 
-    appStorage: AppStorage;
+    appStorage: AppStorage | AppFirebaseStorage;
+    firebaseController: FirebaseController;
 
     constructor() {
         this.appStorage = new AppStorage();
+        this.firebaseController = new FirebaseController();
     }
 
     favouriteNote(): void {
@@ -14,7 +19,7 @@ class Notes {
         const favouriteButtons = [...favouriteNode];
         
         favouriteButtons.forEach((button: HTMLButtonElement) => {
-            button.addEventListener("click", () => {
+            button.addEventListener("click", async () => {
                 if (button.dataset.fav === "0") {
                     button.dataset.fav = "1"
                     favouriteNote.appendChild(button.parentElement)
@@ -22,7 +27,16 @@ class Notes {
                     button.dataset.fav = "0"
                     allNote.appendChild(button.parentElement) 
                 }
-                this.appStorage.takeNotes()
+
+                if(environment === "ls") {
+                    this.appStorage = new AppStorage();
+                    this.appStorage.takeNotes();
+                } else {
+                    this.appStorage = new AppFirebaseStorage();
+                    // await this.appStorage.getNotes();
+                    await this.firebaseController.takeNotes();
+                }
+                
             })
         })
     }
@@ -31,9 +45,17 @@ class Notes {
         const removeNode = document.querySelectorAll(".notes__remove") as NodeListOf<HTMLButtonElement>;
         const removeButtons = [...removeNode];
         removeButtons.forEach((button: HTMLButtonElement) => {
-            button.addEventListener("click",() => {
+            button.addEventListener("click", async () => {
                 button.parentElement.remove();
-                this.appStorage.takeNotes();
+
+                if(environment === "ls"){
+                    this.appStorage = new AppStorage();
+                    this.appStorage.takeNotes()
+                } else {
+                    this.appStorage = new AppFirebaseStorage();
+                    // await this.appStorage.getNotes();
+                    await this.firebaseController.takeNotes();
+                }
             })
         })
     }
@@ -44,7 +66,7 @@ class Notes {
         
         editButtons.forEach((button: HTMLButtonElement) => {
             let index: number = 0;
-            button.addEventListener("click", () => {
+            button.addEventListener("click", async () => {
                 if(index % 2 == 0)  {
                     const title = button.parentNode.children[3] as HTMLTextAreaElement;
                     const content = button.parentNode.children[4] as HTMLTextAreaElement;
@@ -61,7 +83,15 @@ class Notes {
                     content.disabled = true;
                     index++;
                 }
-                this.appStorage.takeNotes();
+
+                if(environment === "ls") {
+                    this.appStorage = new AppStorage();
+                    this.appStorage.takeNotes()
+                } else {
+                    this.appStorage = new AppFirebaseStorage();
+                    // await this.appStorage.getNotes()
+                    await this.firebaseController.takeNotes();
+                }
             })
             index = 0;
         })
