@@ -7,37 +7,46 @@ const firebaseApp = firebase.initializeApp(firebaseConfig);
 const db = firebaseApp.firestore();
 
 class AppFirebaseStorage implements IAppStorage {
-    notesArray: INote[];
-    idArray: string[]
+  constructor(){
+    this.getNotes()
+  } 
 
-    constructor(){
-        this.notesArray = [];
-        this.idArray = [];
-        this.getNotes()
-    } 
+  async saveNote(note: INote): Promise<void> {
+    await db.collection("notes").add(note);
+  }
 
-    async saveNote(note: INote): Promise<void> {
-        const res = await db.collection("notes").add(note);
-    }
+  async getNotes(): Promise<INote[]> {
+    return await db.collection("notes").get().then((querySnapshot) => {
+      const notes: INote[] = [];
+      querySnapshot.forEach((doc) => {
+          notes.push(doc.data() as INote)
+      })
+      return notes;
+    });
+  }
 
-    async getNotes(): Promise<void> {
-        const res = db.collection("notes").get().then((queryS) => {
-            this.notesArray = [];
-            this.idArray = [];
-            queryS.forEach((doc) => {
-                this.notesArray.push(doc.data() as INote)
-                this.idArray.push(doc.id)
-            })
-        });
-    }
+  async getNotesId(): Promise<string[]> {
+    return await db.collection("notes").get().then((querySnapshot) => {
+      const notes: string[] = [];
+      querySnapshot.forEach((doc) => {
+        notes.push(doc.id)
+      })
+      return notes;
+    });
+  }
 
-    async deleteNote(noteId: string): Promise<void> {
-        const res = await db.collection("notes").doc(noteId).delete()
-    }
+  async deleteAllNotes(): Promise<boolean> {
+    return await db.collection("notes").get().then((querySnapshot) => {
+      querySnapshot.forEach(async (doc) => {          
+        await this.deleteNote(doc.id);
+      })
+      return true;
+  });
+  }
 
-    async updateNote(noteId: string, content: INote): Promise<void>{
-        const res = await db.collection("notes").doc(noteId).update(content)
-    }
+  async deleteNote(noteId: string): Promise<void> {
+    await db.collection("notes").doc(noteId).delete()
+  }
 }
 
 export default AppFirebaseStorage
